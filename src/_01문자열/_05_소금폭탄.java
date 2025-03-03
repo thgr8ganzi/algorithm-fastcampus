@@ -1,13 +1,30 @@
 package _01문자열;
 
+import java.util.Scanner;
+
 public class _05_소금폭탄 {
     public static void main(String[] args) {
-        String time = "09:10:59";
-        int hour = (time.charAt(0) - '0') * 10 + time.charAt(1) - '0';
-        System.out.println(hour);
-        int min = (time.charAt(3) - '0') * 10 + time.charAt(4) - '0';
-        System.out.println(min);
-        int sec = (time.charAt(6) - '0') * 10 + time.charAt(7) - '0';
-        System.out.println(sec);
+        Scanner sc = new Scanner(System.in);
+        String time = sc.nextLine();
+        String time2 = sc.nextLine();
+
+        int curTime = getTime(time);
+        int futureTime = getTime(time2);
+
+
+        String result = getTimeStr(futureTime - curTime <= 0 ? futureTime - curTime + 24 * 3600 : futureTime - curTime);
+        System.out.printf("%s", result);
+    }
+
+    private static String getTimeStr(int i) {
+        return String.format("%02d:%02d:%02d", i / 3600, (i % 3600) / 60, i % 60);
+    }
+
+    private static int getTime(String time) {
+        String[] timeArr = time.split(":");
+        int hour = Integer.parseInt(timeArr[0]) * 3600;
+        int minute = Integer.parseInt(timeArr[1]) * 60;
+        int second = Integer.parseInt(timeArr[2]);
+        return hour + minute + second;
     }
 }
